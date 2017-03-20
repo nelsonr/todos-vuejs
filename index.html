@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO LIST</title>
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+    <main>
+        <h3 class="header">TODO LIST</h3>
+
+        <div class="todo-app" id="todo-app">
+            <div class="new-todo">
+                <form action="#" v-on:submit="addTodo($event)">
+                    <input type="text" name="new-todo" placeholder="Add new todo..." v-model="newTodo">
+                    <button>Add</button>
+                </form>
+            </div>
+
+            <div class="todo-list">
+                <div class="todo-row" v-for="todo in todos">
+                    <input type="checkbox"
+                           v-bind:name="'todo-item-' + todo.index"
+                           v-bind:id="'todo-item-' + todo.index"
+                           v-bind:checked="todo.checked"
+                           v-on:click="toggleChecked(todo.index)" />
+
+                    <label v-bind:for="'todo-item-' + todo.index">{{ todo.text }}</label>
+                </div>
+            </div>
+
+            <div class="todo-actions">
+                <button class="action" v-bind:disabled="todosHistoryLength === 0" v-on:click="undo">Undo</button>
+                <button class="action" v-bind:disabled="todos.length === 0" v-on:click="selectAll">Toggle All</button>
+                <button class="action" v-bind:disabled="checkedCount === 0" v-on:click="removeSelected">Remove Selected</button>
+            </div>
+        </div>
+    </main>
+
+    <script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
